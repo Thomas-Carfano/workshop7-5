@@ -1,33 +1,33 @@
 const coffeeMenu = require('./coffee_data');
 
 //Print an array of all the drinks on the menu.
-    //Create an empty array
+        //Create an empty array
 let drinksMenu = [];
-    //Add drinks from data to a drinks menu array
+        //Add drinks from data to a drinks menu array
 coffeeMenu.forEach((drink) => {
     drinksMenu.push(drink.name);
 }); 
 console.table(drinksMenu);
 
 //Print an array of drinks that are less than or equal to $5
-    //Create function to find cheap drinks
+        //Create function to find cheap drinks
     const drinkPrice = (dprice) => {
         if(dprice.price <= 5){
             return dprice.price;
         }
     }
-    //Filter coffeeMenu to show cheap drinks
+        //Filter coffeeMenu to show cheap drinks
     const cheapDrinks = coffeeMenu.filter(drinkPrice);
     console.table(cheapDrinks);
 
 //Print an array of drinks that are priced at an even number.
-    //Create a function to find drinks with an even price
+        //Create a function to find drinks with an even price
     const evenPrice = (priceEven) => {
         if(priceEven.price % 2 == 0){
             return priceEven;
         }
     };
-    //Filter coffeeMenu to show drinks with an even prices
+        //Filter coffeeMenu to show drinks with an even prices
     const evenDrinks = coffeeMenu.filter(evenPrice);
     console.table(evenDrinks);
 
@@ -41,14 +41,32 @@ const sum = coffeeMenu.reduce((accumulator, object) => {
   console.log(sum);
 
 //Print an array with all the drinks that are seasonal.
-    console.table(coffeeMenu.filter((seasonalDrink) => {
-        return seasonalDrink.seasonal === true
-    }));
+const seasonalDrinks = (coffeeMenu.filter((seasonalDrink) => {
+    return seasonalDrink.seasonal === true
+}));    
+console.table(seasonalDrinks);
 
 //Print all the seasonal drinks with the words "with imported beans" after the item name. For example: "affogato with imported beans".
 let drinksMenu2 = [];
-    //Add drinks from data to a drinks menu array
-coffeeMenu.forEach((drinkB) => {
-    drinksMenu2.push(drinkB.name + ' imported with beans');
+        //Add drinks from data to a drinks menu array
+        seasonalDrinks.forEach((drinkB) => {
+    drinksMenu2.push([drinkB.name + " imported with beans", drinkB.price, drinkB.seasonal]);
 }); 
 console.table(drinksMenu2);
+
+//or
+
+// const addNameToSeasonals = (drink) => {
+//     if(drink.seasonal){
+//         drink.name += " with imported beans";
+//     }
+//     return drink;
+// };
+
+// const drinksWithNewNames = coffeeMenu.map(addNameToSeasonals);
+
+// const isSeasonal = (drink) => {
+//     return drink.seasonal
+// };
+
+// console.log(drinksWithNewNames.filter(isSeasonal));
